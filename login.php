@@ -10,13 +10,16 @@
 <?php include 'header.php';?>
 <div class="container mt-5">
 <?php
+
 session_start();
+require_once 'db.php';
+
 
 //  只在使用者按下登入按鈕時才處理
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-  $account = $_POST['account'] ?? '';
-  $password = $_POST['password'] ?? '';
+  $account = mysqli_real_escape_string($conn,$_POST["account"]);
+  $password = mysqli_real_escape_string($conn,$_POST["password"]);
 
   try {
     require_once 'db.php';
